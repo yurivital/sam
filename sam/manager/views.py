@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.views import generic
 from .models import Document, Entity, Project
 
 
-def index(request):
-    entities = Entity.objects.order_by("name")
-    context = {'entities': entities}
-    return render(request, 'entity/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'entity/index.html'
+    context_object_name = 'entities'
+
+    def get_queryset(self):
+        return Entity.objects.order_by("name")
 
 
 def entityDetail(request, entity_id):
