@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h2>Documents list for project "{{ project.name}}" and entity "{{ entity.name }}"</h2>
+    {% if documents %}
+    <ul>
+      {% for document in documents %}
+      <li>
+        <a href="#">{{ docuement.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No document are available.</p>
+    {% endif %}
+  </body>
+</html>
