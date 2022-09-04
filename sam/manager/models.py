@@ -3,7 +3,7 @@ from django.db import models
 
 class Entity(models.Model):
     """Root of content hierarchy"""
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
 
     def __str__(self) -> str:
         return self.name
@@ -16,6 +16,12 @@ class Project(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['entity_id', 'name'], name='Unique project name per entity')
+        ]
 
 
 class Document(models.Model):

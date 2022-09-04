@@ -24,6 +24,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Migrate
+        run: cd sam && python manage.py migrate
       - name: Run Tests
-        run: |
-          python sam/manage.py test
+        run: cd sam && python manage.py test
