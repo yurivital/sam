@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h2>Entities list</h2>
-    {% if entities %}
-    <ul>
-      {% for entity in entities %}
-      <li>
-        <a href="{% url 'manager:entity' entity.id %}">{{ entity.name }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No entities are available.</p>
-    {% endif %}
-  </body>
-</html>
+{% extends 'base.html' %} 
+{% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">Entities</li>
+{% endblock%} 
+{% block content %}
+<h2>Entities list</h2>
+{% if entities %}
+<ul>
+  {% for entity in entities %}
+  <li>
+    <a href="{% url 'manager:entity' entity.id %}">{{ entity.name }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No entities are available.</p>
+{% endif %} {% endblock%}
