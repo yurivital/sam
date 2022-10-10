@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h2>Project list of "{{ entity.name }}"</h2>
-    {% if projects %}
-    <ul>
-      {% for project in projects %}
-      <li>
-        <a href="{% url 'manager:project' entity.id project.id  %}">{{ project.name }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No project are available.</p>
-    {% endif %}
-  </body>
-</html>
+{% extends 'base.html' %} 
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">Entities</li>
+<li class="breadcrumb-item active" aria-current="page">{{ entity.name }}</li>
+{% endblock%} 
+{% block content %}
+<h2>Project list for "{{ entity.name }}"</h2>
+{% if projects %}
+<ul>
+  {% for project in projects %}
+  <li>
+    <a href="{% url 'manager:project' entity.id project.id  %}"
+      >{{ project.name }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No project are available.</p>
+{% endif %} {% endblock %}
