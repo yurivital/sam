@@ -6,17 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('manager', '0001_initial'),
+        ("manager", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='entity',
-            name='name',
+            model_name="entity",
+            name="name",
             field=models.CharField(max_length=150, unique=True),
         ),
         migrations.AddConstraint(
-            model_name='project',
-            constraint=models.UniqueConstraint(fields=('entity_id', 'name'), name='Unique project name per entity'),
+            model_name="project",
+            constraint=models.UniqueConstraint(
+                fields=("entity_id", "name"), name="Unique project name per entity"
+            ),
         ),
     ]
