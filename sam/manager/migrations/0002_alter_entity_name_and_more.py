@@ -17,8 +17,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name="project",
-            constraint=models.UniqueConstraint(
-                fields=("entity_id", "name"), name="Unique project name per entity"
-            ),
+            constraint=models.UniqueConstraint(fields=("entity_id", "name"), name="Unique project name per entity"),
         ),
     ]

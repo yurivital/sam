@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">{{ entity.name }}</li>
+{% endblock%} {% block content %}
+<h2>Project list for "{{ entity.name }}"</h2>
+<ul>
+  {% for project in entity.projects.all %}
+  <li>
+    <a href="{% url 'manager:project' project.id  %}">{{ project.name }}</a>
+  </li>
+  {% empty %}
+  <li>No project are available.</li>
+
+  {% endfor %}
+</ul>
+{% endblock %}

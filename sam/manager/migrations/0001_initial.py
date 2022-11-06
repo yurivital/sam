@@ -41,9 +41,7 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=150)),
                 (
                     "entity",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="manager.entity"
-                    ),
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="manager.entity"),
                 ),
             ],
         ),
