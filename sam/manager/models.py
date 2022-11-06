@@ -29,13 +29,25 @@ class Project(models.Model):
         return self.name
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=15)
+    codeAlpha3 = models.CharField(max_length=3)
+    codeAlpha2 = models.CharField(max_length=2)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Document(models.Model):
     """Represent an traductable content"""
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="documents")
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING, null=True, related_name="languages")
+
     name = models.CharField(max_length=255)
     stored_id = models.UUIDField(default=uuid.uuid4())
-    footprint = models.CharField(max_length=255, default="NO-FOOTPRINT")
+    footprint = models.CharField(max_length=255, default="")
+    size = models.BigIntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name
