@@ -2,9 +2,9 @@
 <li class="breadcrumb-item active" aria-current="page">{{ entity.name }}</li>
 {% endblock%} {% block content %}
 <h2>Project list for "{{ entity.name }}"</h2>
-<ul>
+<ul class="list-group list-group-flush">
   {% for project in entity.projects.all %}
-  <li>
+  <li class="list-group-item">
     <a href="{% url 'manager:project' project.id  %}">{{ project.name }}</a>
   </li>
   {% empty %}
