@@ -19,17 +19,17 @@ class Project(models.Model):
     entity = models.ForeignKey(Entity, on_delete=models.CASCADE, related_name="projects")
     name = models.CharField(max_length=150)
 
-    def __str__(self) -> str:
-        return self.name
-
     class Meta:
         constraints = [models.UniqueConstraint(fields=["entity_id", "name"], name="Unique project name per entity")]
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Document(models.Model):
     """Represent an traductable content"""
 
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="documents")
     name = models.CharField(max_length=255)
 
     def __str__(self) -> str:

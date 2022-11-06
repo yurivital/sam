@@ -5,9 +5,7 @@
 <ul>
   {% for project in entity.projects.all %}
   <li>
-    <a href="{% url 'manager:project' entity.id project.id  %}"
-      >{{ project.name }}</a
-    >
+    <a href="{% url 'manager:project' project.id  %}">{{ project.name }}</a>
   </li>
   {% empty %}
   <li>No project are available.</li>

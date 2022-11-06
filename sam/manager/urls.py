@@ -7,8 +7,8 @@ urlpatterns = [
     path("", views.EntityListView.as_view(), name="index"),
     path("entity/<int:pk>/", views.EntityDetailView.as_view(), name="entity"),
     path(
-        "entity/<int:entity_id>/project/<int:project_id>/",
-        views.projectDetail,
+        "entity/project/<int:pk>/",
+        views.ProjectDetailView.as_view(),
         name="project",
     ),
 ]

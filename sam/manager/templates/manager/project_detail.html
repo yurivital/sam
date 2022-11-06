@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page">
+  {{ project.entity.name }}
+</li>
+<li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
+{% endblock%} {% block content %}
+<h2>Documents list for project "{{ project.name}}"</h2>
+<ul>
+  {% for document in project.documents.all %}
+  <li>
+    <a href="#">{{ document.name }}</a>
+  </li>
+  {% empty %}
+  <li>No document are available.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
