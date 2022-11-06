@@ -1,14 +1,16 @@
 import uuid
 from django.db import models
+from colorfield.fields import ColorField
 
 
 class Entity(models.Model):
     """Root of content hierarchy"""
 
     name = models.CharField(max_length=150, unique=True)
+    color = ColorField(default="#FFFFFF")
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["color"]
 
     def __str__(self) -> str:
         return self.name

@@ -1,9 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <h2>Entities list</h2>
 {% if entities %}
-<ul>
+
+<ul class="list-group list-group-flush">
   {% for entity in entities %}
-  <li>
+  <li
+    class="list-group-item"
+    style="background : linear-gradient(90deg, rgba(2,0,36,0) 0%, {{entity.color}} 100%);"
+  >
     <a href="{% url 'manager:entity' entity.id %}">{{ entity.name }}</a>
   </li>
   {% endfor %}

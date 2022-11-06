@@ -34,6 +34,7 @@ ROOT_DOCUMENTS = "./documents"
 INSTALLED_APPS = [
     "manager.apps",
     "manager.apps.ManagerConfig",
+    "colorfield",
     "django_bootstrap5",
     "django.contrib.admin",
     "django.contrib.auth",
