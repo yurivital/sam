@@ -6,15 +6,50 @@
 {% endblock%} {% block content %}
 <h2>Documents list for project "{{ project.name}}"</h2>
 
-<ul class="list-group list-group-flush">
+<div class="accordion" id="documentList">
   {% for document in project.documents.all %}
-  <li class="list-group-item">
-    <a href="#">{{ document.name }}</a>
-  </li>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{document.id}}">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse{{document.id}}"
+        aria-expanded="true"
+        aria-controls="collapse{{document.id}}"
+      >
+        <span>{{ document.name }}</span>
+        <span class="badge bg-light text-dark">
+          {{ document.language.name|default:"---" }}</span
+        >
+        <span
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="{{document.footprint}}"
+          >🐾</span
+        >
+        <span></span>
+      </button>
+    </h2>
+    <div
+      id="collapse{{document.id}}"
+      class="accordion-collapse collapse"
+      aria-labelledby="heading{{document.id}}"
+      data-bs-parent="#documentList"
+    >
+      <div class="accordion-body">
+        <a
+          href="{{ MEDIA_URL }}{{ document.stored_id }}"
+          download="{{ document.name }}"
+          >Download</a>
+
+      </div>
+    </div>
+  </div>
   {% empty %}
   <li>No document are available.</li>
   {% endfor %}
-</ul>
+</div>
 
 <div class="card mt-4">
   <div class="card-body">
@@ -23,7 +58,7 @@
       action="{% url 'manager:project' project.id %}"
       method="post"
       enctype="multipart/form-data"
-      clas="form"
+      class="form"
     >
       {% csrf_token %} {% bootstrap_form form layout="horizontal" %} 
       {% bootstrap_button button_type="submit" content="Add" %}

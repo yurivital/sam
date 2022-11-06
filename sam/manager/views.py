@@ -22,7 +22,7 @@ class AddDocumentForm(forms.ModelForm):
 
     class Meta:
         model = Document
-        fields = ["project", "file"]
+        fields = ["project", "file", "language"]
 
 
 class ProjectDetailView(generic.DetailView):
@@ -44,7 +44,12 @@ class AddDocumentFormView(SingleObjectMixin, FormView):
             file = store_file(request.FILES["file"])
             user_file_name = form.cleaned_data["file"].name
             self.object = Document.objects.create(
-                name=user_file_name, stored_id=file[0], footprint=file[1], project=form.cleaned_data["project"]
+                name=user_file_name,
+                stored_id=file["name"],
+                footprint=file["footprint"],
+                size=file["size"],
+                project=form.cleaned_data["project"],
+                language=form.cleaned_data["language"],
             )
 
             return super().post(request, *args, **kwargs)
