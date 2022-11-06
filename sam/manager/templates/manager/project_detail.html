@@ -1,17 +1,32 @@
-{% extends 'base.html' %} {% block breadcrumbs %}
+{% extends 'base.html' %} {% load django_bootstrap5 %} {% block breadcrumbs %}
 <li class="breadcrumb-item active" aria-current="page">
   {{ project.entity.name }}
 </li>
 <li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
 {% endblock%} {% block content %}
 <h2>Documents list for project "{{ project.name}}"</h2>
-<ul>
+
+<ul class="list-group list-group-flush">
   {% for document in project.documents.all %}
-  <li>
+  <li class="list-group-item">
     <a href="#">{{ document.name }}</a>
   </li>
   {% empty %}
   <li>No document are available.</li>
   {% endfor %}
 </ul>
+
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Add document</h5>
+    <form
+      action="{% url 'manager:project' project.id %}"
+      method="post"
+      clas="form"
+    >
+      {% csrf_token %} {% bootstrap_form form layout="horizontal" %}
+      {% bootstrap_button button_type="submit" content="Add" %}
+    </form>
+  </div>
+</div>
 {% endblock %}

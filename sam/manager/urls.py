@@ -8,7 +8,7 @@ urlpatterns = [
     path("entity/<int:pk>/", views.EntityDetailView.as_view(), name="entity"),
     path(
         "entity/project/<int:pk>/",
-        views.ProjectDetailView.as_view(),
+        views.ProjectView.as_view(),
         name="project",
     ),
 ]
