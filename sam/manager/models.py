@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 
@@ -31,6 +32,8 @@ class Document(models.Model):
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="documents")
     name = models.CharField(max_length=255)
+    stored_id = models.UUIDField(default=uuid.uuid4())
+    footprint = models.CharField(max_length=255, default="NO-FOOTPRINT")
 
     def __str__(self) -> str:
         return self.name
