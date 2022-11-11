@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load django_bootstrap5 %} {% block breadcrumbs %}
+{% extends 'base.html' %} {% load django_bootstrap5 %} {% load action %} 
+{% block breadcrumbs %}
 <li class="breadcrumb-item active" aria-current="page">
   {{ project.entity.name }}
 </li>
@@ -22,14 +23,7 @@
         <span class="badge bg-light text-dark">
           {{ document.language.name|default:"---" }}</span
         >
-        <span
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="{{document.footprint}}"
-          >🐾</span
-        >
-        <span></span>
-      </button>
+       </button>
     </h2>
     <div
       id="collapse{{document.id}}"
@@ -37,13 +31,7 @@
       aria-labelledby="heading{{document.id}}"
       data-bs-parent="#documentList"
     >
-      <div class="accordion-body">
-        <a
-          href="{{ MEDIA_URL }}{{ document.stored_id }}"
-          download="{{ document.name }}"
-          >Download</a>
-
-      </div>
+      <div class="accordion-body">{% display_actions document %}</div>
     </div>
   </div>
   {% empty %}

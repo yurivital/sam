@@ -1,6 +1,8 @@
 import uuid
-from django.db import models
+import pathlib
+
 from colorfield.fields import ColorField
+from django.db import models
 
 
 class Entity(models.Model):
@@ -48,6 +50,10 @@ class Document(models.Model):
     stored_id = models.UUIDField(default=uuid.uuid4())
     footprint = models.CharField(max_length=255, default="")
     size = models.BigIntegerField(default=0)
+
+    @property
+    def public_name(self):
+        return "{}{}".format(self.stored_id, pathlib.PurePath(self.name).suffix)
 
     def __str__(self) -> str:
         return self.name

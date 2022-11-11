@@ -1,0 +1,32 @@
+{% load static %}
+<div class="container">
+  <div class="row mb-2">
+    <div class="col">
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        class="badge bg-light text-dark"
+        title="Checksum"
+        >🐾 {{document.footprint}}</span
+      >
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col">
+      <a
+        class="btn btn-primary"
+        href="{% get_media_prefix %}{{ document.public_name }}"
+        role="button"
+        download="{{ document.name }}"
+        >Download</a
+      >
+    </div>
+    {% for action in actions %}
+    <div class="col">
+      <a class="btn btn-primary" href="{{action.url}}" role="button"
+        >{{action.text}}</a
+      >
+    </div>
+    {%endfor%}
+  </div>
+</div>
