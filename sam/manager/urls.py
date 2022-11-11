@@ -12,4 +12,5 @@ urlpatterns = [
         views.ProjectView.as_view(),
         name="project",
     ),
+    path("action/<str:action>/<int:doc_id>/", views.ActionView.as_view(), name="perform-action"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

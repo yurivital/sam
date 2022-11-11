@@ -1,16 +1,15 @@
 # sam
 
+## Dependecies
+
+- Python 3.11+
+- Django 4+
+- Tesseract OCR 4.1
+
 ## Developpment
 
-- Create venv, postfixed with "-env", activate it and install dependancies.
-
 ```python
-python3 -m venv dev-env
-source dev-env/bin/activate
-pip install -r requirements.txt
+poetry install
+poetry run sam/manage.py migrate
+poetry run sam/manage.py runserver
 ```
-
-- apply migration
-  `python manage.py migrate`
-- run projet
-  `python manage.py runserver`

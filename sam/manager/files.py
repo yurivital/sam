@@ -1,5 +1,6 @@
 import hashlib
 from os import path
+import pathlib
 import uuid
 from django.conf import settings
 
@@ -7,7 +8,8 @@ from django.conf import settings
 def store_file(f):
     name = uuid.uuid4()
     root_dir = settings.MEDIA_ROOT
-    fullpath = path.join(root_dir, str(name))
+    suffix = pathlib.Path(str(name)).suffix
+    fullpath = path.join(root_dir, "{0}{1}".format(str(name), suffix))
     with open(fullpath, "wb+") as destination:
         for chunk in f.chunks():
             destination.write(chunk)

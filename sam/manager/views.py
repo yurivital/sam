@@ -1,10 +1,12 @@
-from django.views import generic, View
 from django import forms
 from django.urls import reverse
+from django.views import View, generic
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
-from .models import Document, Entity, Project
+from django.shortcuts import get_object_or_404, redirect
+
 from .files import store_file
+from .models import Document, Entity, Project
 
 
 class EntityListView(generic.ListView):
@@ -16,15 +18,6 @@ class EntityDetailView(generic.DetailView):
     model = Entity
 
 
-class AddDocumentForm(forms.ModelForm):
-    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
-    file = forms.FileField()
-
-    class Meta:
-        model = Document
-        fields = ["project", "file", "language"]
-
-
 class ProjectDetailView(generic.DetailView):
     model = Project
 
@@ -32,6 +25,15 @@ class ProjectDetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context["form"] = AddDocumentForm(initial={"project": context["object"].id})
         return context
+
+
+class AddDocumentForm(forms.ModelForm):
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), widget=forms.HiddenInput())
+    file = forms.FileField()
+
+    class Meta:
+        model = Document
+        fields = ["project", "file", "language"]
 
 
 class AddDocumentFormView(SingleObjectMixin, FormView):
@@ -66,3 +68,9 @@ class ProjectView(View):
     def post(self, request, *args, **kwargs):
         view = AddDocumentFormView.as_view()
         return view(request, *args, **kwargs)
+
+
+class ActionView(View):
+    def get(self, request, *args, **kwargs):
+        doc = get_object_or_404(Document, pk=kwargs["doc_id"])
+        return redirect("manager:project", permanent=False, pk=doc.project.id)
