@@ -8,8 +8,7 @@ register = template.Library()
 
 def display_actions(document):
     actions = []
-    extentions = PurePath(document.name).suffix
-    print(extentions)
+    extentions = PurePath(document.name).suffix.lower()
     match extentions:
         case item if item in [".png", ".jpg", ".tiff", ".gif"]:
             actions.append(
@@ -19,7 +18,6 @@ def display_actions(document):
             actions.append(
                 {"text": "Translate", "url": reverse("manager:perform-action", args=("translate", document.id))}
             )
-    print(actions)
     return {"actions": actions, "document": document}
 
 

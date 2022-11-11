@@ -5,18 +5,22 @@ import uuid
 from django.conf import settings
 
 
-def store_file(f):
-    name = uuid.uuid4()
+def get_path(document):
     root_dir = settings.MEDIA_ROOT
-    suffix = pathlib.Path(str(name)).suffix
-    fullpath = path.join(root_dir, "{0}{1}".format(str(name), suffix))
-    with open(fullpath, "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+    suffix = pathlib.PurePath(document.name).suffix
+    fullpath = path.join(root_dir, "{0}{1}".format(str(document.stored_id), suffix))
+    return fullpath
 
+
+def hash_file(fullpath):
     with open(fullpath, "rb") as f:
         digest = hashlib.file_digest(f, "sha256")
+    return digest.hexdigest()
 
-    filesize = path.getsize(fullpath)
 
-    return {"name": name, "footprint": digest.hexdigest(), "size": filesize}
+def create_storage(file_name):
+    storage_id = uuid.uuid4()
+    root_dir = settings.MEDIA_ROOT
+    suffix = pathlib.PurePath(str(file_name)).suffix
+    fullpath = path.join(root_dir, "{0}{1}".format(str(storage_id), suffix))
+    return {"storage_id": storage_id, "fullpath": fullpath}
