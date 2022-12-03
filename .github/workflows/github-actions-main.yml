@@ -28,5 +28,7 @@ jobs:
         run: poetry run black . --check
       - name: Migrate
         run: poetry run sam/manage.py migrate
+      - name: Create document storage
+        run: mkdir -p ./documents
       - name: Run tests
         run: poetry run sam/manage.py test sam
