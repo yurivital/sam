@@ -6,7 +6,7 @@ from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.shortcuts import get_object_or_404, redirect
 
-from .files import create_storage, hash_file
+from .files import add_document
 from .models import Document, Entity, Project
 from .actions import perfom_ocr
 
@@ -45,23 +45,11 @@ class AddDocumentFormView(SingleObjectMixin, FormView):
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-            user_file_name = form.cleaned_data["file"].name
-            storage = create_storage(user_file_name)
-            fullpath = storage["fullpath"]
-            file = request.FILES["file"]
-            with open(fullpath, "wb+") as destination:
-                for chunk in file.chunks():
-                    destination.write(chunk)
-
-            self.object = Document.objects.create(
-                name=user_file_name,
-                stored_id=storage["storage_id"],
-                footprint=hash_file(fullpath),
-                size=os.path.getsize(fullpath),
-                project=form.cleaned_data["project"],
-                language=form.cleaned_data["language"],
+            uploaded_file_name = form.cleaned_data["file"].name
+            uploaded_file_content = request.FILES["file"]
+            self.object = add_document(
+                uploaded_file_name, uploaded_file_content, form.cleaned_data["project"], form.cleaned_data["language"]
             )
-
             return super().post(request, *args, **kwargs)
 
     def get_success_url(self):

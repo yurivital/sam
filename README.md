@@ -4,7 +4,8 @@
 
 - Python 3.11+
 - Django 4+
-- Tesseract OCR 4.1
+- libmagic for file type detection
+- Tesseract OCR 4.1 for image to text transformation
 
 ## Developpment
 

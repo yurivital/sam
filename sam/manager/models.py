@@ -50,6 +50,7 @@ class Document(models.Model):
     stored_id = models.UUIDField(default=uuid.uuid4())
     footprint = models.CharField(max_length=255, default="")
     size = models.BigIntegerField(default=0)
+    mime_type = models.CharField(max_length=50, default="application/octet-stream")
 
     @property
     def public_name(self):

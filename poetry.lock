@@ -88,6 +88,14 @@ python-versions = "*"
 Pillow = ">=5.0"
 
 [[package]]
+name = "filemagic"
+version = "1.6"
+description = "A Python API for libmagic, the library behind the Unix file command"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "mypy-extensions"
 version = "0.4.3"
 description = "Experimental type system extensions for programs checked with the mypy typechecker."
@@ -180,7 +188,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "bba170db0719240aea9cc924b05c6bc4f25f234287e87d9a98930edc60f21092"
+content-hash = "c841c62640291c3569774c63fd6175b7e3fa9844eacf45435b97af54ada6c5e3"
 
 [metadata.files]
 asgiref = [
@@ -229,6 +237,9 @@ django-bootstrap5 = [
 django-colorfield = [
     {file = "django-colorfield-0.7.2.tar.gz", hash = "sha256:9c2c36a7cac60bf6e57e70ca344529a3065226543358d01036e1714371f3166d"},
     {file = "django_colorfield-0.7.2-py3-none-any.whl", hash = "sha256:29dffa09b2ce89f19504a53a120e5bfdbfe3e44621f33b3f94b0e6a572ae93c1"},
+]
+filemagic = [
+    {file = "filemagic-1.6.tar.gz", hash = "sha256:e684359ef40820fe406f0ebc5bf8a78f89717bdb7fed688af68082d991d6dbf3"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
