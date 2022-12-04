@@ -5,7 +5,7 @@ from . import views
 
 app_name = "manager"
 urlpatterns = [
-    path("", views.EntityListView.as_view(), name="index"),
+    path("", views.EntityView.as_view(), name="index"),
     path("entity/<int:pk>/", views.EntityDetailView.as_view(), name="entity"),
     path(
         "entity/project/<int:pk>/",

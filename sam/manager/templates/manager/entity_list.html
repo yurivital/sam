@@ -1,17 +1,31 @@
-{% extends 'base.html' %} {% block content %}
-<h2>Entities list</h2>
-{% if entities %}
+{% extends 'base.html' %}{% load django_bootstrap5 %} {% block content %}
+<div class="col-10">
+  <h2>Entities list</h2>
+  {% if entities %}
+  <ul class="list-group list-group-flush">
+    {% for entity in entities %}
+    <li
+      class="list-group-item"
+      style="background : linear-gradient(90deg, rgba(2,0,36,0) 0%, {{entity.color}} 100%);"
+    >
+      <a href="{% url 'manager:entity' entity.id %}">{{ entity.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No entities are available.</p>
+  {% endif %}
+</div>
+<div class="col-2">
+  <div class="card">
+    <div class="card-body">
+      <form class="form" action="{% url "manager:index" %}" method="post"> 
+        {% csrf_token %}
+        {% bootstrap_form form %} 
+        {% bootstrap_button button_type="submit" content="Add" %}
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.1/jscolor.min.js"></script>
 
-<ul class="list-group list-group-flush">
-  {% for entity in entities %}
-  <li
-    class="list-group-item"
-    style="background : linear-gradient(90deg, rgba(2,0,36,0) 0%, {{entity.color}} 100%);"
-  >
-    <a href="{% url 'manager:entity' entity.id %}">{{ entity.name }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No entities are available.</p>
-{% endif %} {% endblock%}
+{% endblock%}

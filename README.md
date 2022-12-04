@@ -11,7 +11,7 @@ The atomic element of the system is the `Document`, basicly a file, that can rec
 
 Document are handled by a file manager, wich organise documents by `Entities` (can be client or Business Unit) and by `Project`.
 
-## Dependecies
+## Dependencies
 
 - Python 3.11+
 - Django 4+
