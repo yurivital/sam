@@ -1,15 +1,27 @@
-{% extends 'base.html' %} {% block breadcrumbs %}
-<li class="breadcrumb-item active" aria-current="page">{{ entity.name }}</li>
+{% extends 'base.html' %} {% load django_bootstrap5 %} {% block breadcrumbs %}
+<li class="breadcrumb-item active" aria-current="page"><a href="{% url "manager:entity" entity.id %}">{{ entity.name }}</a></li>
 {% endblock%} {% block content %}
-<h2>Project list for "{{ entity.name }}"</h2>
-<ul class="list-group list-group-flush">
-  {% for project in entity.projects.all %}
-  <li class="list-group-item">
-    <a href="{% url 'manager:project' project.id  %}">{{ project.name }}</a>
-  </li>
-  {% empty %}
-  <li>No project are available.</li>
+<div class="col-10">
+  <h2>Project list for "{{ entity.name }}"</h2>
+  <ul class="list-group list-group-flush">
+    {% for project in entity.projects.all %}
+    <li class="list-group-item">
+      <a href="{% url 'manager:project' project.id  %}">{{ project.name }}</a>
+    </li>
+    {% empty %}
+    <li>No project are available.</li>
 
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </ul>
+</div>
+<div class="col-2">
+  <div class="card">
+    <div class="card-body">
+      <form class="form" method="post" action="{% url "manager:entity" entity.id %}">
+        {% csrf_token %} {% bootstrap_form form %} 
+        {% bootstrap_button button_type="submit" content="Add project" %}
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

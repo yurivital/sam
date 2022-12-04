@@ -1,10 +1,9 @@
 {% extends 'base.html' %} {% load django_bootstrap5 %} {% load action %} 
 {% block breadcrumbs %}
-<li class="breadcrumb-item active" aria-current="page">
-  {{ project.entity.name }}
-</li>
-<li class="breadcrumb-item active" aria-current="page">{{ project.name }}</li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url "manager:entity" project.entity.id %}">{{ project.entity.name }}</a></li>
+<li class="breadcrumb-item active" aria-current="page"><a href="{% url "manager:project" project.id %}">{{ project.name }}</a></li>
 {% endblock%} {% block content %}
+<div class="col-10">
 <h2>Documents list for project "{{ project.name}}"</h2>
 
 <div class="accordion" id="documentList">
@@ -38,19 +37,20 @@
   <li>No document are available.</li>
   {% endfor %}
 </div>
-
-<div class="card mt-4">
+</div>
+<div class="col-2">
+<div class="card">
   <div class="card-body">
-    <h5 class="card-title">Add document</h5>
     <form
       action="{% url 'manager:project' project.id %}"
       method="post"
       enctype="multipart/form-data"
       class="form"
     >
-      {% csrf_token %} {% bootstrap_form form layout="horizontal" %} 
-      {% bootstrap_button button_type="submit" content="Add" %}
+      {% csrf_token %} {% bootstrap_form form %} 
+      {% bootstrap_button button_type="submit" content="Add document" %}
     </form>
   </div>
+</div>
 </div>
 {% endblock %}

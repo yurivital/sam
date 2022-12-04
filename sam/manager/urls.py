@@ -5,11 +5,11 @@ from . import views
 
 app_name = "manager"
 urlpatterns = [
-    path("", views.EntityView.as_view(), name="index"),
-    path("entity/<int:pk>/", views.EntityDetailView.as_view(), name="entity"),
+    path("", views.EntityRouterView.as_view(), name="index"),
+    path("entity/<int:pk>/", views.EntityDetailRouterView.as_view(), name="entity"),
     path(
-        "entity/project/<int:pk>/",
-        views.ProjectView.as_view(),
+        "project/<int:pk>/",
+        views.ProjectRouterView.as_view(),
         name="project",
     ),
     path("action/<str:action>/<int:doc_id>/", views.ActionView.as_view(), name="perform-action"),

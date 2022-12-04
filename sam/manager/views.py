@@ -20,10 +20,6 @@ class EntityListView(generic.ListView):
         return context
 
 
-class EntityDetailView(generic.DetailView):
-    model = Entity
-
-
 class EntityListForm(forms.ModelForm):
     class Meta:
         model = Entity
@@ -47,13 +43,56 @@ class EntityViewFormView(SingleObjectMixin, FormView):
         return reverse("manager:entity", kwargs={"pk": self.object.id})
 
 
-class EntityView(View):
+class EntityRouterView(View):
     def get(self, request, *args, **kwargs):
         view = EntityListView.as_view()
         return view(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         view = EntityViewFormView.as_view()
+        return view(request, *args, **kwargs)
+
+
+class EntityDetailView(generic.DetailView):
+    model = Entity
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = ProjectForm
+        return context
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            "name",
+        ]
+
+
+class EntityDetailViewForm(SingleObjectMixin, FormView):
+    model = Project
+    form_class = ProjectForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            entity = kwargs["pk"]
+            self.object = Project.objects.create(name=name, entity_id=entity)
+            return super().post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse("manager:project", kwargs={"pk": self.object.id})
+
+
+class EntityDetailRouterView(View):
+    def get(self, request, *args, **kwargs):
+        view = EntityDetailView.as_view()
+        return view(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        view = EntityDetailViewForm.as_view()
         return view(request, *args, **kwargs)
 
 
@@ -93,7 +132,7 @@ class AddDocumentFormView(SingleObjectMixin, FormView):
         return reverse("manager:project", kwargs={"pk": self.object.project.id})
 
 
-class ProjectView(View):
+class ProjectRouterView(View):
     def get(self, request, *args, **kwargs):
         view = ProjectDetailView.as_view()
         return view(request, *args, **kwargs)
