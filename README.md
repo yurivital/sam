@@ -1,4 +1,8 @@
-# sam
+# SAM
+
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+
+[![SAM CI](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml/badge.svg)](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml)
 
 SAM is an toolbox for people dealing with various type of documents in different languages.
 Specifications are mainly edicted by my beloved wife, but feel free make suggestions.
@@ -11,7 +15,7 @@ The atomic element of the system is the `Document`, basicly a file, that can rec
 
 Document are handled by a file manager, wich organise documents by `Entities` (can be client or Business Unit) and by `Project`.
 
-## Dependecies
+## Dependencies
 
 - Python 3.11+
 - Django 4+
