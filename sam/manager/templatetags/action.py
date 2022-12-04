@@ -17,9 +17,12 @@ def display_actions(document):
             actions.append(
                 {"text": "Convert to PDF", "url": reverse("manager:perform-action", args=("ocr", document.id))}
             )
-        case item if item in ["plain/text"]:
+        case item if item in ["audio/mpeg", "audio/flac"]:
             actions.append(
-                {"text": "Translate", "url": reverse("manager:perform-action", args=("translate", document.id))}
+                {
+                    "text": "Transcribe to text",
+                    "url": reverse("manager:perform-action", args=("transcribe", document.id)),
+                }
             )
     return {"actions": actions, "document": document}
 

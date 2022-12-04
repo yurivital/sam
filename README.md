@@ -23,6 +23,8 @@ Document are handled by a file manager, wich organise documents by `Entities` (c
 - Tesseract OCR 4.1 for Image-to-Text transformation
 - Whisper for Speech-To-Text transcriptions whih rely on :
   - ffmpeg
+  - Pytorch
+  - numpy
 
 ## Developpment
 
