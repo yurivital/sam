@@ -1,4 +1,8 @@
-# sam
+# SAM
+
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+
+[![SAM CI](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml/badge.svg)](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml)
 
 SAM is an toolbox for people dealing with various type of documents in different languages.
 Specifications are mainly edicted by my beloved wife, but feel free make suggestions.

@@ -18,10 +18,12 @@
         aria-expanded="true"
         aria-controls="collapse{{document.id}}"
       >
-        <span>{{ document.name }}</span>
+        <span>{{ document.name }}</span> 
+        <span class="badge text-info">{{document.size | filesizeformat}}</span>
         <span class="badge bg-light text-dark">
           {{ document.language.name|default:"---" }}</span
         >
+       
        </button>
     </h2>
     <div
