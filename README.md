@@ -20,7 +20,9 @@ Document are handled by a file manager, wich organise documents by `Entities` (c
 - Python 3.11+
 - Django 4+
 - libmagic for file type detection
-- Tesseract OCR 4.1 for image to text transformation
+- Tesseract OCR 4.1 for Image-to-Text transformation
+- Whisper for Speech-To-Text transcriptions whih rely on :
+  - ffmpeg
 
 ## Developpment
 

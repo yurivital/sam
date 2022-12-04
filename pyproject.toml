@@ -12,6 +12,7 @@ django-bootstrap5 = "^22.1"
 django-colorfield = "^0.7.2"
 pytesseract = "^0.3.10"
 filemagic = "^1.6"
+whisper = "^1.1.10"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
