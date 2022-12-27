@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 
 from .files import add_document
 from .models import Document, Entity, Project
-from .actions import perfom_ocr
+from .actions import perfom_ocr, perform_audio_transcription
 
 
 class EntityListView(generic.ListView):
@@ -148,5 +148,7 @@ class ActionView(View):
         match kwargs["action"]:
             case "ocr":
                 perfom_ocr(doc)
+            case "transcribe":
+                perform_audio_transcription(doc)
 
         return redirect("manager:project", permanent=False, pk=doc.project.id)

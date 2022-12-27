@@ -31,6 +31,9 @@ def add_document(user_file_name, file_content, project, language):
     elif isinstance(file_content, bytes):
         with open(fullpath, "w+b") as f:
             f.write(file_content)
+    elif isinstance(file_content, str):
+        with open(fullpath, "w+", encoding="utf-8") as f:
+            f.write(file_content)
     else:
         raise NotImplementedError('File content format "{}" not handled '.format(type(file_content)))
 
