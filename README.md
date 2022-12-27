@@ -4,16 +4,16 @@
 
 [![SAM CI](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml/badge.svg)](https://github.com/yurivital/sam/actions/workflows/github-actions-main.yml)
 
-SAM is an toolbox for people dealing with various type of documents in different languages.
+SAM is a toolbox for people dealing with various type of documents in different languages.
 Specifications are mainly edicted by my beloved wife, but feel free make suggestions.
 
 ## Principle
 
 ### Document manager
 
-The atomic element of the system is the `Document`, basicly a file, that can receive transformations, such as automatic translation, Optical character recognition, Speech-To-Text, ...
+The atomic element of the system is the `Document`, basically a file, that can receive transformations, such as automatic translation, Optical character recognition, Speech-To-Text, ...
 
-Document are handled by a file manager, wich organise documents by `Entities` (can be client or Business Unit) and by `Project`.
+Document are handled by a file manager, which organise documents by `Entities` (can be client or Business Unit) and by `Project`.
 
 ## Dependencies
 
@@ -21,14 +21,14 @@ Document are handled by a file manager, wich organise documents by `Entities` (c
 - Django 4+
 - libmagic for file type detection
 - Tesseract OCR 4.1 for Image-to-Text transformation
-- Whisper for Speech-To-Text transcriptions whih rely on :
+- Whisper for Speech-To-Text transcriptions which rely on :
   - ffmpeg
   - Pytorch
   - numpy
 
-## Developpment
+## Development
 
-```python
+```shell
 poetry install
 poetry run sam/manage.py migrate
 poetry run sam/manage.py runserver
