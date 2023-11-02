@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-Django = "^4.1.10"
+Django = "^4.1.13"
 django-bootstrap5 = "^22.1"
 django-colorfield = "^0.7.2"
 pytesseract = "^0.3.10"
